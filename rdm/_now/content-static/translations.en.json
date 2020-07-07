@@ -1,0 +1,80 @@
+{
+    "en": {
+        "ui": {
+            "authInfo": "You will receive a confirmation email after sending this request.<br/><br/><strong>Please add the confirmation link in the same browser <br/>as you used for the request.<br/><br/>Other browsers won't be validated!",
+            "publishInfo": "If you confirm, all content changes will be published.<br/><br/>Shure?",
+            "inputEmailLabel": "EMail",
+            "inputEmailPlaceholder": "Enter your EMail here.",
+            "btCancel": "Cancel",
+            "btSave": "Save",
+            "btSend": "Send",
+            "btPublish": "Publish",
+            "cmsControlTabAuthentication": "Authentication",
+            "cmsControlTabPublish": "Publish"
+        },
+        "head": {
+            "title": "RDM Services :: Tools for Max Planck Researchers",
+            "terms": "Terms of service",
+            "imprint": "Imprint",
+            "privacy": "Privacy",
+            "sp": ":"
+        },
+        "nav": {
+            "start": {
+                "label": "Start your project!"
+            },
+            "running": {
+                "label": "Keep it<br/>running!"
+            },
+            "tools": {
+                "label": "Tools and services you will<br/>love!"
+            },
+            "finalize": {
+                "label": "Finalize it!"
+            },
+            "structure": {
+                "label": "About us :-)",
+                "sub": {
+                    "terms": {
+                        "label": "Terms of service"
+                    },
+                    "imprint": {
+                        "label": "Imprint"
+                    },
+                    "disclaimer": {
+                        "label": "Disclaimer"
+                    }
+                }
+            }
+        },
+        "content": {
+            "start": {},
+            "running": {},
+            "tools": {},
+            "finalize": {},
+            "structure": {}
+        },
+        "special": {
+            "ui": {
+                "nav": {
+                    "start": {
+                        "icon": "start-runner-mod",
+                        "iconScaleSelectedFc": 1.2
+                    },
+                    "running": {},
+                    "tools": {
+                        "labelOffsetPercentY": 50
+                    },
+                    "finalize": {
+                        "icon": "finish",
+                        "iconScaleSelectedFc": 1.1
+                    },
+                    "structure": {
+                        "icon": "info",
+                        "scaleMin": "ITEM_SPECIAL_MIN"
+                    }
+                }
+            }
+        }
+    }
+}
