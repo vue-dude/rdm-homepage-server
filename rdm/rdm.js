@@ -41,11 +41,11 @@ const CONST = {
     STRUCTURE_SERVE: '../rdm/_now/content-serve/structure.en.json',
     TRANSLATIONS_SERVE: '../rdm/_now/content-serve/translations.en.json',
     // this is copied to the public server if SYNC_PUBLIC === true !
-    PUBLIC_ROOT: config.CONST.PUBLIC_ROOT || null,
-    STRUCTURE_SERVE_PUBLIC: config.CONST.STRUCTURE_SERVE_PUBLIC || null,
-    TRANSLATIONS_SERVE_PUBLIC: config.CONST.TRANSLATIONS_SERVE_PUBLIC || null,
-    MEDIA_SERVE_PUBLIC: config.CONST.MEDIA_SERVE_PUBLIC || null,
-    INDEX_PUBLIC: config.CONST.INDEX_PUBLIC || null,
+    PUBLIC_ROOT: config.CONST.PUBLIC_ROOT || '_flatfiles',
+    STRUCTURE_SERVE_PUBLIC: config.CONST.STRUCTURE_SERVE_PUBLIC || '/config/structure.en.json',
+    TRANSLATIONS_SERVE_PUBLIC: config.CONST.TRANSLATIONS_SERVE_PUBLIC || '/config/translations.en.json',
+    MEDIA_SERVE_PUBLIC: config.CONST.MEDIA_SERVE_PUBLIC || '/media/',
+    INDEX_PUBLIC: config.CONST.INDEX_PUBLIC || '/idx.html',
     //
     STRUCTURE_PREVIEW: '../rdm/_now/content-preview/structure.en.json',
     TRANSLATIONS_PREVIEW: '../rdm/_now/content-preview/translations.en.json',
@@ -352,7 +352,8 @@ const createServer = async () => {
             jpeg: true,
             jpg: true,
             png: true,
-            gif: true
+            gif: true,
+            webp: true
         }
         const regx = new RegExp('^[a-zA-Z0-9()_.-]+$', 'g')
         const fn = input.split('.')
@@ -548,7 +549,20 @@ const cleanupMediaFiles = async () => {
     let res2 = getMediaUrlsFromRawData(trns2)
     // console.log('cleanupMediaFiles: res2 (preview) = ', res2)
     let res = { ...res1, ...res2 }
-    // console.log('cleanupMediaFiles: used queue: res = ', res)
+    // the following enables to set a fallback jpeg for a webp image,
+    // which get copied even if its not directly linked in the content!
+    const fallbackJpegz = {}
+    _.each(res, value => {
+        let l1 = value.split('.')
+        if (l1.pop() === 'webp') {
+            l1.push('jpg')
+            const jpg = l1.join('.')
+            fallbackJpegz[jpg] = jpg
+        }
+    })
+    res = { ...res, ...fallbackJpegz }
+    //
+    console.log('cleanupMediaFiles: used queue: res = ', res)
     await fs.removeAsync(`${CONST.MEDIA_SERVE}-unused`).catch(() => null)
     await fs.renameAsync(CONST.MEDIA_SERVE, `${CONST.MEDIA_SERVE}-unused`).catch(() => null)
     await fs.mkdirAsync(CONST.MEDIA_SERVE).catch(() => null)
