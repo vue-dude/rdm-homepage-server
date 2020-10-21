@@ -1,0 +1,109 @@
+{
+    "setup": {
+        "fallbackLocale": "en",
+        "locale": "en",
+        "scrollHintDelayMsec": 5000,
+        "translations": {
+            "en": {}
+        }
+    },
+    "router": [
+        {
+            "path": "*",
+            "redirect": "/structure",
+            "children": "structure"
+        },
+        {
+            "path": "/admin",
+            "meta": {
+                "admin": true
+            }
+        }
+    ],
+    "structure": {
+        "structure": {
+            "sub": {
+                "startpage": {},
+                "website": {},
+                "intro": {},
+                "contact": {}
+            }
+        },
+        "start": {
+            "sub": {
+                "overview": {},
+                "dataManagementPlans": {},
+                "legalAndEthical": {},
+                "fileHandling": {},
+                "fileFormats": {},
+                "pdfFormat": {
+                    "mainNav": false,
+                    "circleNav": false
+                }
+            }
+        },
+        "running": {
+            "sub": {
+                "overview": {},
+                "services": {}
+            }
+        },
+        "finalize": {
+            "sub": {
+                "overview": {},
+                "repositories": {},
+                "licences": {},
+                "services": {}
+            }
+        },
+        "tools": {
+            "sub": {
+                "overview": {},
+                "labfolder": {},
+                "labcam": {},
+                "keeper": {},
+                "edmond": {},
+                "doi-service": {},
+                "collective": {}
+            }
+        },
+        "legal": {
+            "sub": {
+                "terms": {
+                    "circleNav": false
+                },
+                "imprint": {
+                    "circleNav": false
+                },
+                "privacy": {
+                    "circleNav": false
+                }
+            }
+        }
+    },
+    "ui": {
+        "nav": {
+            "start": {
+                "pos": "TOP"
+            },
+            "running": {
+                "pos": "RIGHT"
+            },
+            "tools": {
+                "pos": "LEFT"
+            },
+            "finalize": {
+                "pos": "DOWN"
+            },
+            "structure": {
+                "track": 2,
+                "pos": "TOP",
+                "scaleMin": "ITEM_SPECIAL_MIN"
+            },
+            "legal": {
+                "track": null,
+                "use": false
+            }
+        }
+    }
+}

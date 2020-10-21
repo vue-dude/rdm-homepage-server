@@ -5,7 +5,8 @@
         "scrollHintDelayMsec": 5000,
         "translations": {
             "en": {}
-        }
+        },
+        "home": ["structure", "startpage"]
     },
     "router": [
         {
@@ -23,8 +24,9 @@
     "structure": {
         "structure": {
             "sub": {
-                "intro": {},
+                "startpage": {},
                 "website": {},
+                "intro": {},
                 "contact": {}
             }
         },
@@ -35,8 +37,10 @@
                 "legalAndEthical": {},
                 "fileHandling": {},
                 "fileFormats": {},
-                "sustainabilityFactors": {},
-                "pdfFormat": {}
+                "pdfFormat": {
+                    "mainNav": false,
+                    "circleNav": false
+                }
             }
         },
         "running": {
@@ -70,10 +74,10 @@
                     "circleNav": false
                 },
                 "imprint": {
-                     "circleNav": false
+                    "circleNav": false
                 },
                 "privacy": {
-                     "circleNav": false
+                    "circleNav": false
                 }
             }
         }

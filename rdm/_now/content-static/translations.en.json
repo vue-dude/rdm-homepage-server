@@ -13,11 +13,12 @@
             "cmsControlTabPublish": "Publish"
         },
         "head": {
-            "title": "RDM Services :: Tools for Max Planck Researchers",
-            "terms": "Terms of service",
+            "title": "RDM – The Information Platform for Max Planck Researchers",
+            "terms": "Terms of Services",
             "imprint": "Imprint",
             "privacy": "Privacy",
-            "sp": ":"
+            "sp": ":",
+            "logoLink": "http://www.mpdl.mpg.de"
         },
         "nav": {
             "start": {
@@ -36,7 +37,7 @@
                 "label": "About us :-)",
                 "sub": {
                     "terms": {
-                        "label": "Terms of service"
+                        "label": "Terms of Services"
                     },
                     "imprint": {
                         "label": "Imprint"
