@@ -1,7 +1,6 @@
 .node-persist
 persist**
 node_modules
-rdm/auth-store
 rdm/cms-store
 rdm/cert
 rdm/content-serve
