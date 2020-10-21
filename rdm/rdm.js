@@ -41,6 +41,7 @@ const CONST = {
     STRUCTURE_SERVE: '../rdm/_now/content-serve/structure.en.json',
     TRANSLATIONS_SERVE: '../rdm/_now/content-serve/translations.en.json',
     // this is copied to the public server if SYNC_PUBLIC === true !
+    FLATFILES : '_flatfiles',
     PUBLIC_ROOT: config.CONST.PUBLIC_ROOT || '_flatfiles',
     STRUCTURE_SERVE_PUBLIC: config.CONST.STRUCTURE_SERVE_PUBLIC || '/config/structure.en.json',
     TRANSLATIONS_SERVE_PUBLIC: config.CONST.TRANSLATIONS_SERVE_PUBLIC || '/config/translations.en.json',
@@ -459,17 +460,17 @@ const createServer = async () => {
                 source = resolveMediaPath(subpath) // images get loaded from cms
                 break
             default:
-                if (DEV_MODE && CONST.PUBLIC_ROOT === null) {
-                    // special, enables easy get of structure and translations (dev)
+                if (DEV_MODE && CONST.PUBLIC_ROOT === CONST.FLATFILES) {
+                    // special, enables easy get of structure and translations (dev-mode)
                     source = subpath === '/structure' ? CONST.STRUCTURE_SERVE : ''
                     source = subpath === '/translations' ? CONST.TRANSLATIONS_SERVE : source
                 } else {
                     // all other files (website) loaded from public root
                     source = `${CONST.PUBLIC_ROOT}${subpath}`
                 }
+
         }
         let file = fs.createReadStream(source)
-
         file.on('error', () => (file = null))
         if (file) {
             res.setHeader('Content-Type', getMimeByEnding(source.split('.').pop()))
@@ -540,14 +541,10 @@ const getMediaUrlsFromRawData = data => {
 const cleanupMediaFiles = async () => {
     // get all used media from the translations
     const trns1 = await updateTranslations({ previewMode: false })
-    // console.log('cleanupMediaFiles: trns1 = ', JSON.stringify(trns1, null, 4))
     let res1 = getMediaUrlsFromRawData(trns1)
-    // console.log('cleanupMediaFiles: res1 = ', res1)
     // TODO check why directly load preview translations sometimes dont work (missing 00. images)
     const trns2 = await updateTranslations({ previewMode: true })
-    // console.log('cleanupMediaFiles: trns2 (preview) = ', JSON.stringify(trns2, null, 4))
     let res2 = getMediaUrlsFromRawData(trns2)
-    // console.log('cleanupMediaFiles: res2 (preview) = ', res2)
     let res = { ...res1, ...res2 }
     // the following enables to set a fallback jpeg for a webp image,
     // which get copied even if its not directly linked in the content!
@@ -562,7 +559,6 @@ const cleanupMediaFiles = async () => {
     })
     res = { ...res, ...fallbackJpegz }
     //
-    console.log('cleanupMediaFiles: used queue: res = ', res)
     await fs.removeAsync(`${CONST.MEDIA_SERVE}-unused`).catch(() => null)
     await fs.renameAsync(CONST.MEDIA_SERVE, `${CONST.MEDIA_SERVE}-unused`).catch(() => null)
     await fs.mkdirAsync(CONST.MEDIA_SERVE).catch(() => null)
