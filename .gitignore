@@ -1,10 +1,4 @@
 .node-persist
 persist**
 node_modules
-rdm/cms-store
-rdm/cert
-rdm/content-serve
-rdm/content-preview
-rdm/media-serve
-rdm/_backups
 .idea
